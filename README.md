@@ -47,6 +47,7 @@ Follow these steps to set up and run the project locally:
     Open your browser and navigate to `http://127.0.0.1:5000`.
 
 ## Project Structure
+'''
 BitRiverAI/
 ├── app.py                 # Main application file
 ├── config.py              # Configuration settings
@@ -78,7 +79,7 @@ BitRiverAI/
 ├── .gitignore             # Git ignore file
 ├── README.md              # Project documentation
 └── venv/                  # Virtual environment (excluded by .gitignore)
-
+'''
 ## Technologies Used
 
 - **Backend**: Flask, Flask-SQLAlchemy, Flask-Migrate
