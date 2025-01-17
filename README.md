@@ -47,31 +47,37 @@ Follow these steps to set up and run the project locally:
     Open your browser and navigate to `http://127.0.0.1:5000`.
 
 ## Project Structure
-
 BitRiverAI/
-├── app.py # Main application file 
-├── config.py # Configuration settings 
-├── migrations/ # Database migration files 
-├── models.py # Database models 
-├── requirements.txt # Project dependencies 
-├── static/ # Static files (CSS, JS) 
-│ ├── css/ 
-│ └── js/ 
-├── templates/ # HTML templates 
-  │ 
-  ├── base.html 
-  │ 
-  ├── index.html 
-  │ 
-  ├── login.html 
-  │ 
-  └── register.html 
-├── instance/ # Database instance 
-  │ 
-  └── site.db 
-├── .gitignore # Git ignore file 
-└── README.md # Project documentation
-
+├── app.py                 # Main application file
+├── config.py              # Configuration settings
+├── migrations/            # Database migration files
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── script.py.mako
+│   ├── versions/
+│   │   └── 8982d6bb2f01_initial_migration.py
+│   └── README
+├── models.py              # Database models
+├── requirements.txt       # Project dependencies
+├── static/                # Static files (CSS, JS)
+│   ├── css/
+│   │   ├── styles.css
+│   │   ├── login.css
+│   │   └── index.css
+│   └── js/
+│       ├── chat.js
+│       ├── index.js
+│       └── matrix.js
+├── templates/             # HTML templates
+│   ├── base.html
+│   ├── index.html
+│   ├── login.html
+│   └── register.html
+├── instance/              # Database instance
+│   └── site.db
+├── .gitignore             # Git ignore file
+├── README.md              # Project documentation
+└── venv/                  # Virtual environment (excluded by .gitignore)
 
 ## Technologies Used
 
