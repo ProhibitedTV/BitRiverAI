@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h2>BitRiver AI Chat</h2>
+        <p>Model Selector: <span id="current-model"></span></p>
+    </div>
+    <div class="chat-log" id="chat-log"></div>
+    <div class="chat-input">
+        <select id="model-select">
+            {% for model in models %}
+            <option value="{{ model }}">{{ model }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" id="user-input" placeholder="Type your message..." autofocus>
+        <button id="send-button">Send</button>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
