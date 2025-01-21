@@ -14,6 +14,15 @@ logger = logging.getLogger(__name__)
 login_manager = LoginManager()
 
 def create_app():
+    """
+    Create and configure the Flask application.
+
+    This function sets up the Flask app, loads the configuration based on the environment,
+    initializes extensions (SQLAlchemy, Flask-Migrate, Flask-Login), and registers blueprints.
+
+    Returns:
+        app (Flask): The configured Flask application.
+    """
     app = Flask(__name__)
 
     # Load configuration
@@ -34,18 +43,29 @@ def create_app():
 
         @login_manager.user_loader
         def load_user(user_id):
+            """
+            Load a user by their user ID.
+
+            Args:
+                user_id (int): The ID of the user to load.
+
+            Returns:
+                User: The user object if found, otherwise None.
+            """
             return db.session.get(User, int(user_id))
 
     # Register blueprints
     from routes.auth import auth_bp
     from routes.chat import chat_bp
     from routes.main import main_bp
-    from routes.imagegen import imagegen_bp  # Import the new blueprint
+    from routes.imagegen import imagegen_bp
+    from routes.poetrygen import poetrygen_bp  # Import the new blueprint
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(main_bp)
-    app.register_blueprint(imagegen_bp)  # Register the new blueprint
+    app.register_blueprint(imagegen_bp)
+    app.register_blueprint(poetrygen_bp)  # Register the new blueprint
 
     return app
 

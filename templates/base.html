@@ -11,8 +11,10 @@
     <div class="top-bar">
         <ul class="top-bar-links">
             {% if current_user.is_authenticated %}
+                <!-- Logout link for authenticated users -->
                 <li><a href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             {% else %}
+                <!-- Login and Register links for unauthenticated users -->
                 <li><a href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                 <li><a href="{{ url_for('auth.register') }}"><i class="fas fa-user-plus"></i> Register</a></li>
             {% endif %}
@@ -22,25 +24,31 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="sidebar-header">
+            <!-- Logo Image -->
             <img src="{{ url_for('static', filename='images/bitriver_logo.png') }}" alt="BitRiver AI Logo" class="logo-img">
         </div>
         <ul class="sidebar-links">
+            <!-- Navigation links -->
             <li><a href="{{ url_for('main.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="{{ url_for('chat.chat_page') }}"><i class="fas fa-comments"></i> Chat</a></li>
             <li><a href="{{ url_for('imagegen.imagegen_page') }}"><i class="fas fa-image"></i> AI Image Generator</a></li>
+            <li><a href="{{ url_for('poetrygen.poetrygen_page') }}"><i class="fas fa-pen-fancy"></i> Poetry Generator</a></li>
             <li><a href="{{ url_for('main.settings') }}"><i class="fas fa-cog"></i> Settings</a></li>
         </ul>        
     </div>
 
+    <!-- Main Content Area -->
     <main class="content-area">
         {% block content %}
         {% endblock %}
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 BitRiver AI. All rights reserved.</p>
     </footer>
 
+    <!-- Font Awesome Script -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

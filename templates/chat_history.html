@@ -11,9 +11,29 @@
                 <p><strong>Prompt:</strong> {{ chat.prompt }}</p>
                 <p><strong>Response:</strong> {{ chat.response }}</p>
                 <p><strong>Timestamp:</strong> {{ chat.timestamp }}</p>
+                <button class="delete-button" data-chat-id="{{ chat.id }}">Delete</button>
             </div>
         </li>
         {% endfor %}
     </ul>
 </div>
+
+<script>
+document.querySelectorAll('.delete-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const chatId = this.getAttribute('data-chat-id');
+        fetch(`/chat/history/${chatId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) {
+                this.closest('li').remove();
+            } else {
+                alert('Failed to delete chat.');
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

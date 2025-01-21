@@ -1,3 +1,6 @@
+/**
+ * Initialize the matrix background effect when the DOM content is loaded.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const matrixContainer = document.querySelector('.matrix-bg');
 
@@ -6,31 +9,41 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    const numChars = 150;
+    const canvas = document.createElement('canvas');
+    matrixContainer.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
 
-    function createMatrixEffect() {
-        for (let i = 0; i < numChars; i++) {
-            const span = document.createElement('span');
-            span.textContent = Math.random() > 0.5 ? '0' : '1';
-            span.style.position = 'absolute';
-            span.style.left = `${Math.random() * width}px`;
-            span.style.top = `${Math.random() * height}px`;
-            span.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            span.style.animationDelay = `${Math.random() * 5}s`;
-            matrixContainer.appendChild(span);
-        }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = Array(256).join("1").split("");
+    const fontSize = 16; // Increased font size for better visibility
+    const columns = canvas.width / fontSize;
+
+    /**
+     * Draw the matrix effect on the canvas.
+     */
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = `${fontSize}px monospace`;
+
+        letters.forEach((y, index) => {
+            const text = String.fromCharCode(3e4 + Math.random() * 33);
+            const x = index * fontSize;
+            ctx.fillText(text, x, y);
+            letters[index] = y > canvas.height + Math.random() * 1e4 ? 0 : y + fontSize;
+        });
     }
 
-    createMatrixEffect();
+    setInterval(draw, 33);
 
+    /**
+     * Adjust the canvas size when the window is resized.
+     */
     window.addEventListener('resize', () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        while (matrixContainer.firstChild) {
-            matrixContainer.removeChild(matrixContainer.firstChild);
-        }
-        createMatrixEffect();
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     });
 });

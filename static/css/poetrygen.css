@@ -1,0 +1,87 @@
+.poetrygen-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00;
+    text-align: center;
+}
+
+.poetrygen-container h1 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.model-select-container,
+.poetry-controls {
+    margin-bottom: 20px;
+}
+
+.model-select-container label,
+.poetry-controls label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+#model-select,
+#poetry-style,
+#theme,
+#keywords,
+#tone,
+#length {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: black;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+}
+
+#generate-poetry-button {
+    padding: 15px 25px;
+    background: #00ff00;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+#generate-poetry-button:hover {
+    background: #00cc00;
+    transform: scale(1.05);
+}
+
+.thinking-indicator {
+    text-align: center;
+    font-style: italic;
+    color: #ffcc00;
+    animation: blink 1s infinite;
+    margin-top: 10px;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.poetry-result {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00;
+    text-align: left;
+    white-space: pre-wrap;
+}

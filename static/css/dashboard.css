@@ -1,8 +1,29 @@
+body {
+    background: linear-gradient(to right, #000428, #004e92);
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+}
+
 .dashboard-container {
     max-width: 900px;
     margin: 50px auto;
     text-align: center;
-    color: #00ff00;
+    color: #ffffff;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.dashboard-container p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
 }
 
 .dashboard-widgets {
@@ -21,16 +42,18 @@
     width: 100%;
     max-width: 300px;
     text-align: left;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .widget:hover {
     transform: translateY(-10px);
+    box-shadow: 0 0 25px #00ff00;
 }
 
 .widget h2 {
     color: #00cc00;
     margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
 .widget p {
@@ -53,4 +76,14 @@
 .widget .btn:hover {
     background: #00cc00;
     transform: scale(1.05);
+}
+
+a {
+    color: #00ffcc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00ccff;
+    text-decoration: underline;
 }

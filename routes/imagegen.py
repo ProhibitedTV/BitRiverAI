@@ -6,6 +6,12 @@ import logging
 imagegen_bp = Blueprint('imagegen', __name__)
 
 def get_models_refiners_samplers():
+    """
+    Retrieve models, refiners, and samplers from the Stable Diffusion API.
+
+    Returns:
+        tuple: A tuple containing lists of models, refiners, and samplers.
+    """
     try:
         models_response = requests.get("http://127.0.0.1:7860/sdapi/v1/sd-models")
         models_response.raise_for_status()
@@ -26,12 +32,27 @@ def get_models_refiners_samplers():
 @imagegen_bp.route('/imagegen', methods=['GET'])
 @login_required
 def imagegen_page():
+    """
+    Render the image generation page with available models, refiners, and samplers.
+
+    Returns:
+        Response: Renders the imagegen.html template with the lists of models, refiners, and samplers.
+    """
     models, refiners, samplers = get_models_refiners_samplers()
     return render_template('imagegen.html', models=models, refiners=refiners, samplers=samplers)
 
 @imagegen_bp.route('/generate-image', methods=['POST'])
 @login_required
 def generate_image():
+    """
+    Handle image generation requests.
+
+    Receives parameters from the client, sends a request to the Stable Diffusion API,
+    and returns the generated image.
+
+    Returns:
+        Response: JSON response containing the base64 encoded image or an error message.
+    """
     try:
         prompt = request.form.get('prompt')
         negative_prompt = request.form.get('negative_prompt', '')

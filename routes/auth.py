@@ -7,6 +7,15 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Handle user login.
+
+    GET: Render the login page.
+    POST: Authenticate the user and log them in if credentials are valid.
+
+    Returns:
+        Response: Redirects to the main index page on successful login, otherwise reloads the login page.
+    """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -21,12 +30,29 @@ def login():
 @auth_bp.route('/logout')
 @login_required
 def logout():
+    """
+    Handle user logout.
+
+    Logs out the current user and redirects to the login page.
+
+    Returns:
+        Response: Redirects to the login page.
+    """
     logout_user()
     flash('Logged out successfully.', 'success')
     return redirect(url_for('auth.login'))
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Handle user registration.
+
+    GET: Render the registration page.
+    POST: Create a new user account if the provided username and email are unique.
+
+    Returns:
+        Response: Redirects to the login page on successful registration, otherwise reloads the registration page.
+    """
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']  # Ensure email is captured

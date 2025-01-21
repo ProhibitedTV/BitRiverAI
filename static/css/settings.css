@@ -1,0 +1,101 @@
+/* Ensure the background is black */
+body {
+    position: relative;
+    overflow: hidden;
+    background: black;
+}
+
+/* Matrix background styling */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: black;
+    overflow: hidden;
+}
+
+/* Settings container styling */
+.settings-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Settings container header styling */
+.settings-container h1 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Settings container paragraph styling */
+.settings-container p {
+    margin-bottom: 20px;
+}
+
+/* Settings card styling */
+.settings-card {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Settings card header styling */
+.settings-card h2 {
+    margin-top: 0;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Settings card label styling */
+.settings-card label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Settings card input styling */
+.settings-card input[type="text"],
+.settings-card input[type="email"],
+.settings-card input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: black;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+}
+
+/* Settings card checkbox styling */
+.settings-card input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Settings card button styling */
+.settings-card button {
+    padding: 10px 20px;
+    background: #00ff00;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Settings card button hover effect */
+.settings-card button:hover {
+    background: #00cc00;
+}
