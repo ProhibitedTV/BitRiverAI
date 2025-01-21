@@ -1,0 +1,29 @@
+.chat-history-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ff00;
+    text-align: center;
+}
+
+.chat-history-container h1 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.chat-history-list {
+    list-style: none;
+    padding: 0;
+}
+
+.chat-history-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00;
+}

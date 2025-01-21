@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - BitRiver AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome to Your Dashboard</h1>
+    <p>Get an overview of your activity and access features easily.</p>
+
+    <div class="dashboard-widgets">
+        <div class="widget card">
+            <h2>Recent Chats</h2>
+            <p>View your chat history and interactions.</p>
+            <a href="{{ url_for('chat.chat') }}" class="btn">Go to Chat</a>
+            <a href="{{ url_for('chat.chat_history') }}" class="btn">View Chat History</a>
+        </div>
+
+        <div class="widget card">
+            <h2>Account Settings</h2>
+            <p>Manage your profile and preferences.</p>
+            <a href="{{ url_for('main.settings') }}" class="btn">Settings</a>
+        </div>
+
+        <div class="widget card">
+            <h2>Image Generation</h2>
+            <p>Create images using AI.</p>
+            <a href="{{ url_for('imagegen.imagegen_page') }}" class="btn">Generate Images</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

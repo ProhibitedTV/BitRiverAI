@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="imagegen-container">
+    <h1>Generate AI Images</h1>
+    <form id="imagegen-form">
+        <div class="form-group">
+            <label for="prompt">Enter a prompt:</label>
+            <input type="text" id="prompt" name="prompt" required>
+        </div>
+
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <select id="model" name="model">
+                {% for model in models %}
+                <option value="{{ model.model_name }}">{{ model.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="refiner">Refiner:</label>
+            <select id="refiner" name="refiner">
+                {% for refiner in refiners %}
+                <option value="{{ refiner.model_name }}">{{ refiner.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="sampler_name">Sampler Name:</label>
+            <select id="sampler_name" name="sampler_name">
+                {% for sampler in samplers %}
+                <option value="{{ sampler.name }}">{{ sampler.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="negative_prompt">Negative Prompt:</label>
+            <input type="text" id="negative_prompt" name="negative_prompt">
+        </div>
+
+        <div class="form-group">
+            <label for="steps">Sampling Steps:</label>
+            <input type="number" id="steps" name="steps" min="1" max="50" value="20">
+        </div>
+
+        <div class="form-group">
+            <label for="cfg_scale">CFG Scale:</label>
+            <input type="number" id="cfg_scale" name="cfg_scale" min="1" max="30" value="7">
+        </div>
+
+        <div class="form-group">
+            <label for="width">Width:</label>
+            <select id="width" name="width">
+                <option value="512">512</option>
+                <option value="640">640</option>
+                <option value="720">720</option>
+                <option value="1080">1080</option>
+                <option value="1280">1280</option>
+                <option value="1920">1920</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="height">Height:</label>
+            <select id="height" name="height">
+                <option value="512">512</option>
+                <option value="640">640</option>
+                <option value="720">720</option>
+                <option value="1080">1080</option>
+                <option value="1280">1280</option>
+                <option value="1920">1920</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="restore_faces">Restore Faces:</label>
+            <input type="checkbox" id="restore_faces" name="restore_faces">
+        </div>
+
+        <div class="form-group">
+            <label for="tiling">Tiling:</label>
+            <input type="checkbox" id="tiling" name="tiling">
+        </div>
+
+        <button type="submit">Generate</button>
+    </form>
+    <div id="thinking-indicator" class="thinking-indicator" style="display: none;">Generating image...</div>
+    <div id="result" class="image-result">
+        <img id="generated-image" src="" alt="Generated Image" style="display: none; max-height: 500px;"/>
+        <a id="download-link" href="#" download="generated_image.png" style="display: none;">Download Image</a>
+    </div>
+</div>
+
+<script>
+document.getElementById('imagegen-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    let prompt = document.getElementById('prompt').value;
+    let model = document.getElementById('model').value;
+    let refiner = document.getElementById('refiner').value;
+    let sampler_name = document.getElementById('sampler_name').value;
+    let negative_prompt = document.getElementById('negative_prompt').value;
+    let steps = document.getElementById('steps').value;
+    let cfg_scale = document.getElementById('cfg_scale').value;
+    let width = document.getElementById('width').value;
+    let height = document.getElementById('height').value;
+    let restore_faces = document.getElementById('restore_faces').checked;
+    let tiling = document.getElementById('tiling').checked;
+    let thinkingIndicator = document.getElementById('thinking-indicator');
+
+    thinkingIndicator.style.display = 'block';
+
+    fetch('/generate-image', {
+        method: 'POST',
+        body: new URLSearchParams({
+            prompt: prompt,
+            model: model,
+            refiner: refiner,
+            sampler_name: sampler_name,
+            negative_prompt: negative_prompt,
+            steps: steps,
+            cfg_scale: cfg_scale,
+            width: width,
+            height: height,
+            restore_faces: restore_faces,
+            tiling: tiling
+        }),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.image) {
+            const generatedImage = document.getElementById('generated-image');
+            const downloadLink = document.getElementById('download-link');
+            const imageUrl = 'data:image/png;base64,' + data.image;
+
+            generatedImage.src = imageUrl;
+            generatedImage.style.display = 'block';
+            downloadLink.href = imageUrl;
+            downloadLink.style.display = 'block';
+        } else {
+            alert('Image generation failed.');
+        }
+    })
+    .catch(err => {
+        console.error('Error:', err);
+        alert('Error: Unable to generate image.');
+    })
+    .finally(() => {
+        thinkingIndicator.style.display = 'none';
+    });
+});
+</script>
+{% endblock %}
