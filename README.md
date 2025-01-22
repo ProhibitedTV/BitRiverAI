@@ -13,7 +13,7 @@ BitRiver AI is a futuristic, AI-driven application with a hacker-inspired design
 
 ## Setup and Installation
 
-Follow these steps to set up and run the project locally:
+Follow these steps to set up and run the project locally using Docker:
 
 1. **Clone the Repository**:
     ```bash
@@ -21,103 +21,68 @@ Follow these steps to set up and run the project locally:
     cd BitRiverAI
     ```
 
-2. **Create a Virtual Environment**:
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
+2. **Build and Run the Docker Containers**:
+    - For development mode:
+      ```bash
+      FLASK_ENV=development GRADIO_ENV=development docker-compose --profile dev up --build
+      ```
+    - For production mode:
+      ```bash
+      FLASK_ENV=production GRADIO_ENV=production docker-compose --profile prod up --build
+      ```
 
-3. **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Set Up the Database**:
-    ```bash
-    flask db init
-    flask db migrate -m "Initial migration"
-    flask db upgrade
-    ```
-
-5. **Set Up Stable Diffusion WebUI as a Service**:
-    - Download and install Stable Diffusion WebUI on your local Ubuntu installation.
-    - Ensure the WebUI is running and accessible at `http://127.0.0.1:7860`.
-    - You can set up the WebUI as a service to ensure it starts automatically on system boot.
-
-    Example service setup:
-    ```bash
-    sudo nano /etc/systemd/system/stable-diffusion-webui.service
-    ```
-
-    Add the following content to the service file:
-    ```ini
-    [Unit]
-    Description=Stable Diffusion WebUI
-    After=network.target
-
-    [Service]
-    ExecStart=/usr/bin/python3 /path/to/stable-diffusion-webui/webui.py
-    WorkingDirectory=/path/to/stable-diffusion-webui
-    User=your-username
-    Restart=always
-
-    [Install]
-    WantedBy=multi-user.target
-    ```
-
-    Enable and start the service:
-    ```bash
-    sudo systemctl enable stable-diffusion-webui
-    sudo systemctl start stable-diffusion-webui
-    ```
-
-6. **Run the Application**:
-    ```bash
-    flask run
-    ```
-
-7. **Access the Application**:
-    Open your browser and navigate to `http://127.0.0.1:5000`.
+3. **Access the Applications**:
+    - Flask application: Open your browser and navigate to `http://127.0.0.1:5000`.
+    - Gradio application: Open your browser and navigate to `http://127.0.0.1:7860`.
 
 ## Project Structure
 ```
 BitRiverAI/
-├── app.py                 # Main application file
-├── config.py              # Configuration settings
-├── migrations/            # Database migration files
-│   ├── alembic.ini
-│   ├── env.py
-│   ├── script.py.mako
-│   ├── versions/
-│   │   └── 8982d6bb2f01_initial_migration.py
-│   └── README
-├── models.py              # Database models
-├── requirements.txt       # Project dependencies
-├── static/                # Static files (CSS, JS)
-│   ├── css/
-│   │   ├── styles.css
-│   │   ├── login.css
-│   │   └── index.css
-│   └── js/
-│       ├── chat.js
-│       ├── index.js
-│       └── matrix.js
-├── templates/             # HTML templates
-│   ├── base.html
-│   ├── index.html
-│   ├── login.html
-│   └── register.html
-├── instance/              # Database instance
-│   └── site.db
-├── .gitignore             # Git ignore file
-├── README.md              # Project documentation
-└── venv/                  # Virtual environment (excluded by .gitignore)
+├── flask-app/             # Flask application folder
+│   ├── Dockerfile         # Dockerfile for Flask app
+│   ├── app.py             # Main application file
+│   ├── config.py          # Configuration settings
+│   ├── migrations/        # Database migration files
+│   │   ├── alembic.ini
+│   │   ├── env.py
+│   │   ├── script.py.mako
+│   │   ├── versions/
+│   │   │   └── 8982d6bb2f01_initial_migration.py
+│   │   └── README
+│   ├── models.py          # Database models
+│   ├── requirements.txt   # Project dependencies
+│   ├── static/            # Static files (CSS, JS)
+│   │   ├── css/
+│   │   │   ├── styles.css
+│   │   │   ├── login.css
+│   │   │   └── index.css
+│   │   └── js/
+│   │       ├── chat.js
+│   │       ├── index.js
+│   │       └── matrix.js
+│   ├── templates/         # HTML templates
+│   │   ├── base.html
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   └── register.html
+│   ├── instance/          # Database instance
+│   │   └── site.db
+│   ├── .gitignore         # Git ignore file
+│   └── README.md          # Project documentation
+├── gradio-app/            # Gradio application folder
+│   ├── Dockerfile         # Dockerfile for Gradio app
+│   ├── app.py             # Main application file
+│   ├── requirements.txt   # Project dependencies
+│   └── ...                # Other Gradio app files
+├── docker-compose.yml     # Docker Compose configuration
+└── README.md              # Project documentation
 ```
 ## Technologies Used
 
 - **Backend**: Flask, Flask-SQLAlchemy, Flask-Migrate
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Database**: SQLite
+- **Containerization**: Docker, Docker Compose
 
 ## Screenshots
 
