@@ -24,7 +24,7 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     """Production configuration."""
-    SECRET_KEY = os.getenv('SECRET_KEY', 'replace_this_in_production')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'qG8xLzMh6XZd-Mv5oF2QKgfUjtbGJxPTA2tN7dp-w68')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///site.db')
     DEBUG = False
 
