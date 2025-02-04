@@ -13,7 +13,7 @@ BitRiver AI is a futuristic, AI-driven application with a hacker-inspired design
 
 ## Setup and Installation
 
-Follow these steps to set up and run the project locally using Docker:
+Follow these steps to set up and run the project locally:
 
 1. **Clone the Repository**:
     ```bash
@@ -21,19 +21,34 @@ Follow these steps to set up and run the project locally using Docker:
     cd BitRiverAI
     ```
 
-2. **Build and Run the Docker Containers**:
-    - For development mode:
-      ```bash
-      FLASK_ENV=development GRADIO_ENV=development docker-compose --profile dev up --build
-      ```
-    - For production mode:
-      ```bash
-      FLASK_ENV=production GRADIO_ENV=production docker-compose --profile prod up --build
-      ```
+2. **Install Dependencies**:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    ```
 
-3. **Access the Applications**:
-    - Flask application: Open your browser and navigate to `http://127.0.0.1:5000`.
-    - Gradio application: Open your browser and navigate to `http://127.0.0.1:7860`.
+3. **Set Up the Database**:
+    ```bash
+    flask db init
+    flask db migrate -m "Initial migration."
+    flask db upgrade
+    ```
+
+4. **Run the Flask Application**:
+    ```bash
+    flask run
+    ```
+
+5. **Run the Gradio Application**:
+    Navigate to the `gradio-app` directory and run the Gradio application:
+    ```bash
+    python app.py
+    ```
+
+## Integration with BitRiverAIServices
+
+This project is meant to be used in conjunction with our other repository, [BitRiverAIServices](https://github.com/ProhibitedTV/BitRiverAIServices). The basic idea is that this Flask application runs, the services run separately, and the whole thing is served as a website. Ensure that both repositories are set up and running to get the full functionality.
 
 ## Project Structure
 ```
@@ -70,11 +85,9 @@ BitRiverAI/
 │   ├── .gitignore         # Git ignore file
 │   └── README.md          # Project documentation
 ├── gradio-app/            # Gradio application folder
-│   ├── Dockerfile         # Dockerfile for Gradio app
 │   ├── app.py             # Main application file
 │   ├── requirements.txt   # Project dependencies
 │   └── ...                # Other Gradio app files
-├── docker-compose.yml     # Docker Compose configuration
 └── README.md              # Project documentation
 ```
 ## Technologies Used
@@ -82,11 +95,6 @@ BitRiverAI/
 - **Backend**: Flask, Flask-SQLAlchemy, Flask-Migrate
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Database**: SQLite
-- **Containerization**: Docker, Docker Compose
-
-## Screenshots
-
-_Add screenshots or gifs showcasing your app here._
 
 ## Contributing
 

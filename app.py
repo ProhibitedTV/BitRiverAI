@@ -26,7 +26,7 @@ def create_app():
     app = Flask(__name__)
 
     # Load configuration
-    env = os.getenv('FLASK_ENV', 'development')
+    env = os.getenv('FLASK_ENV', 'production')
     app.config.from_object(config[env])
 
     # Initialize extensions with app context
@@ -71,4 +71,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=80)

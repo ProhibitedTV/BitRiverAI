@@ -7,62 +7,6 @@
 
 {% block content %}
 <div class="poetrygen-container">
-    <h1>Poetry Generator</h1>
-    <div class="model-select-container">
-        <label for="model-select">Select Model:</label>
-        <select id="model-select">
-            {% for model in models %}
-            <option value="{{ model }}">{{ model }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    
-    <div class="poetry-controls">
-        <div class="control-group">
-            <label for="poetry-style">Poetry Style:</label>
-            <select id="poetry-style">
-                <option value="haiku">Haiku</option>
-                <option value="sonnet">Sonnet</option>
-                <option value="free-verse">Free Verse</option>
-                <option value="limerick">Limerick</option>
-                <option value="acrostic">Acrostic</option>
-            </select>
-        </div>
-        
-        <div class="control-group">
-            <label for="theme">Theme:</label>
-            <input type="text" id="theme" placeholder="Enter a theme...">
-        </div>
-        
-        <div class="control-group">
-            <label for="keywords">Keywords:</label>
-            <input type="text" id="keywords" placeholder="Enter keywords...">
-        </div>
-        
-        <div class="control-group">
-            <label for="tone">Tone:</label>
-            <select id="tone">
-                <option value="happy">Happy</option>
-                <option value="sad">Sad</option>
-                <option value="romantic">Romantic</option>
-                <option value="mysterious">Mysterious</option>
-                <option value="inspirational">Inspirational</option>
-            </select>
-        </div>
-        
-        <div class="control-group">
-            <label for="length">Length:</label>
-            <select id="length">
-                <option value="short">Short</option>
-                <option value="medium">Medium</option>
-                <option value="long">Long</option>
-            </select>
-        </div>
-    </div>
-    
-    <button id="generate-poetry-button">Generate Poetry</button>
-    
-    <div id="thinking-indicator" class="thinking-indicator" style="display: none;">Generating poetry...</div>
-    <div id="poetry-result" class="poetry-result"></div>
+    <iframe src="http://localhost:7863" width="100%" height="100%" frameborder="0" style="min-height: 900px; background-color: black; padding: 0;"></iframe>
 </div>
 {% endblock %}

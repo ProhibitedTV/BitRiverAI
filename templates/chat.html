@@ -2,29 +2,8 @@
 
 {% block content %}
 <div class="chat-container">
-    <div class="chat-header">
-        <h1>Chat with AI</h1>
-        <div class="model-select-container">
-            <label for="model-select">Select Model:</label>
-            <select id="model-select">
-                {% for model in models %}
-                <option value="{{ model }}">{{ model }}</option>
-                {% endfor %}
-            </select>
-        </div>
+    <div id="gradio-interface" class="gradio-interface">
+        <iframe src="http://localhost:7861" width="100%" height="100%" frameborder="0" style="min-height: 900px; background-color: black; padding: 0;"></iframe>
     </div>
-    
-    <div id="chat-log" class="chat-log" style="height: 400px; overflow-y: auto;">
-        <div class="system-message">Welcome! Select a model and start chatting.</div>
-    </div>
-
-    <div class="input-group">
-        <input type="text" id="user-input" placeholder="Type your message..." autofocus>
-        <button id="send-button">Send</button>
-    </div>
-
-    <div id="thinking-indicator" class="thinking-indicator" style="display: none;">AI is thinking...</div>
 </div>
-
-<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}

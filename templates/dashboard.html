@@ -4,19 +4,20 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<script src="{{ url_for('static', filename='js/matrix.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
+<div class="matrix-bg"></div>
 <div class="dashboard-container">
     <h1>Welcome to Your Dashboard</h1>
     <p>Get an overview of your activity and access features easily.</p>
 
     <div class="dashboard-widgets">
         <div class="widget card">
-            <h2>Recent Chats</h2>
-            <p>View your chat history and interactions.</p>
-            <a href="{{ url_for('chat.chat') }}" class="btn">Go to Chat</a>
-            <a href="{{ url_for('chat.chat_history') }}" class="btn">View Chat History</a>
+            <h2>Chat with AI</h2>
+            <p>Interact with AI models through chat.</p>
+            <a href="{{ url_for('chat.chat_page') }}" class="btn">Go to Chat</a>
         </div>
 
         <div class="widget card">
@@ -29,6 +30,12 @@
             <h2>Image Generation</h2>
             <p>Create images using AI.</p>
             <a href="{{ url_for('imagegen.imagegen_page') }}" class="btn">Generate Images</a>
+        </div>
+
+        <div class="widget card">
+            <h2>Poetry Generation</h2>
+            <p>Generate poetry using AI.</p>
+            <a href="{{ url_for('poetrygen.poetrygen_page') }}" class="btn">Generate Poetry</a>
         </div>
     </div>
 </div>
